@@ -9,8 +9,12 @@
 #include <set>
 
 /*
-TODO
-cross reference lentele
+TODO:
+galimai blogai padaro tolower so lietuviskom raidem 
+url funkcionalumas
+makefile
+readme
+refractoring failus
 */
 const std::vector<std::string> FILE_PATHS = {
     "input/sample.txt",
@@ -60,13 +64,13 @@ void file_input(std::map<std::string, int>& words, std::map<std::string, std::se
     std::string line;
     int line_count = 1;
 
-    while(std::getline(ist, line))
+    while(std::getline(ist, line))      
     {
         std::stringstream ss{line};
 
-        for(std::string temp; ss >> temp;)
+        for(std::string temp; ss >> temp;)                  //split words in line
         {
-            for(int i = 0; i < temp.size(); i++)
+            for(int i = 0; i < temp.size(); i++)            //iterate through the word
             {
                 if(std::isupper(temp[i]))                   //check if character ir uppercase, if yes -> make it lower case
                     temp[i] = std::tolower(temp[i]);
@@ -118,5 +122,15 @@ void cross_reference_table_output(const std::map<std::string, std::set<int>>& lo
                 ost << line << " ";
             ost << "\n";
         }
+
+}
+
+void url_input()
+{
+
+}
+
+void url_output()
+{
 
 }
