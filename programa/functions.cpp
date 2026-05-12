@@ -1,72 +1,5 @@
-#include <iostream>
-#include <map>
-#include <string>
-#include <fstream>
-#include <stdexcept>
-#include <sstream>
-#include <vector>
-#include <cctype>
-#include <set>
+#include "globals.hpp"
 
-/*
-TODO:
-wstring
-makefile
-readme
-refractoring failus
-
-*/
-const std::vector<std::string> FILE_PATHS = {
-    "input/sample.txt",
-    "output/output.txt",
-    "output/cross-reference-table.txt",
-    "output/url-list.txt",
-    "input/tld_list.txt"
-};
-
-const std::set<char> punctuation = {
-    ',', 
-    '.', 
-    '!',
-    ';',
-    ':',
-    '?',
-    '(',
-    ')',
-    '{',
-    '}',
-    '[',
-    ']',
-    '"',
-    '&'
-};
-
-const std::vector<std::string> url_start = {
-    "http://",
-    "https://",
-    "www."
-};
-
-
-void file_input(std::map<std::string, int>& words, std::map<std::string, std::set<int>>& location, const std::string filename, const std::string url_file, std::set<std::string>& links);
-void word_count_output(const std::map<std::string, int>& words, const std::string filename);
-void cross_reference_table_output(const std::map<std::string, std::set<int>>& location, const std::map<std::string, int>& words, std::string filename);
-std::string normalize_word(std::string temp);
-void url_output(const std::set<std::string>& links, const std::string filename);
-bool is_link(std::string word, std::set<std::string>& tld_set);
-
-int main()
-{
-    std::map<std::string, int> words;                       //map for duplicate words
-    std::map<std::string, std::set<int>> location;          //cross reference table which stores the line where the duplicate words are
-    std::set<std::string> links;
-
-    file_input(words, location, FILE_PATHS.at(0), FILE_PATHS.at(4), links);
-    word_count_output(words, FILE_PATHS.at(1));
-    cross_reference_table_output(location, words, FILE_PATHS.at(2));
-    url_output(links, FILE_PATHS.at(3));
-    return 0;
-}
 
 void file_input(std::map<std::string, int>& words, std::map<std::string, std::set<int>>& location, const std::string filename, const std::string url_file, std::set<std::string>& links)
 {
@@ -160,14 +93,13 @@ std::string normalize_word(std::string temp)
         auto it = punctuation.find(temp[i]);
         if(it != punctuation.end())
         {
-            std::cout << "removing: '" << temp[i] << "' from word: " << temp << "\n";
             temp.erase(i);
             i--;
         }
     }
-    std::cout << "final word: " << temp << "\n";
     return temp;
 }
+
 bool is_link(std::string word, std::set<std::string>& tld_set)
 {
     std::string temp;

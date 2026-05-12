@@ -1,3 +1,27 @@
-derm: 3 6 
-hi: 2 4 
-hin: 3 5 
+1: 9 11 
+2018: 9 13 
+2019: 5 7 
+butų: 7 
+buvo: 11 13 
+bvp: 1 9 11 
+daugiau: 7 9 
+eur: 7 9 13 
+eurų: 5 11 
+gyvenamieji: 7 
+gyventojui: 1 9 11 13 
+ir: 1 7 9 11 13 
+iš: 7 13 
+lietuvos: 1 11 15 
+m: 3 5 7 9 13 
+mieste: 1 3 7 
+mln: 5 7 
+mlrd: 11 13 
+namai: 7 
+sostinės: 1 11 
+sudarė: 5 13 
+tūkst: 3 
+užsienio: 1 13 
+vienam: 1 9 11 13 
+vilniaus: 5 9 
+viršijo: 9 11 
+šaltinis: 3 5 7 
