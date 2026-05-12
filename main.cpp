@@ -10,16 +10,10 @@
 
 /*
 TODO:
-nx kazkaip atkopijuot ta temp string kad patikrint tld
 wstring
-url funkcionalumas:
-    patikrint:
-    bet kokie slashai po TLD pvz vu.lt/pagalba/lt/
 makefile
 readme
 refractoring failus
-
-
 
 */
 const std::vector<std::string> FILE_PATHS = {
@@ -30,7 +24,7 @@ const std::vector<std::string> FILE_PATHS = {
     "input/tld_list.txt"
 };
 
-const std::vector<char> punctuation = {
+const std::set<char> punctuation = {
     ',', 
     '.', 
     '!',
@@ -43,7 +37,8 @@ const std::vector<char> punctuation = {
     '}',
     '[',
     ']',
-    '"'
+    '"',
+    '&'
 };
 
 const std::vector<std::string> url_start = {
@@ -107,7 +102,7 @@ void file_input(std::map<std::string, int>& words, std::map<std::string, std::se
                 links.insert(temp);
             else
             {
-                normalize_word(temp);
+                temp = normalize_word(temp);
                 ++words[temp]; 
                 location[temp].insert(line_count);
             }
@@ -154,23 +149,23 @@ void cross_reference_table_output(const std::map<std::string, std::set<int>>& lo
 
 }
 
+
 std::string normalize_word(std::string temp)
 {
-    for(int i = 0; i < temp.size(); i++)            //iterate through the word
+    for(int i = 0; i < temp.size(); i++)
     {
-        if(std::isupper(temp[i]))                   //check if character ir uppercase, if yes -> make it lower case
+        if(std::isupper(temp[i]))
             temp[i] = std::tolower(temp[i]);
-                
-        for(int j = 0; j < punctuation.size(); j++)         //remove punctuation
+        
+        auto it = punctuation.find(temp[i]);
+        if(it != punctuation.end())
         {
-            if(temp[i] == punctuation.at(j))
-            {    
-                temp.erase(i);
-                i--;
-                break;
-            }   
+            std::cout << "removing: '" << temp[i] << "' from word: " << temp << "\n";
+            temp.erase(i);
+            i--;
         }
     }
+    std::cout << "final word: " << temp << "\n";
     return temp;
 }
 bool is_link(std::string word, std::set<std::string>& tld_set)
@@ -191,9 +186,14 @@ bool is_link(std::string word, std::set<std::string>& tld_set)
         return false;
     
     std::string tld = word.substr(it + 1);
+    auto slash = tld.find('/');
+    if(slash != std::string::npos)
+        tld = tld.substr(0, slash);                 //nukirpimas po slasho
+    
     for(int i = 0; i < tld.size(); i++)
         tld[i] = toupper(tld[i]);
 
+    
     if(tld_set.find(tld) != tld_set.end())
         return true;
 
