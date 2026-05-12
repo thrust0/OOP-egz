@@ -29,23 +29,26 @@ Rezultatai išsaugomi `output/` aplanke:
 - g++ kompiliatorius
 
 ## Įdiegimo instrukcija
-1. Įdiekite Homebrew (Mac paketų tvarkyklė)
+### 1. Įdiekite Homebrew (Mac paketų tvarkyklė)
 Atidarykite terminalą ir įvykdykite:
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-2. Įdiekite g++ kompiliatorių
+### 2. Įdiekite g++ kompiliatorių
+
 brew install gcc
 Patikrinkite ar įdiegta:
 
 g++ --version
-3. Klonuokite repozitoriją
-git clone https://github.com/thrust0/antra-uzduotis-oop.git
-cd antra-uzduotis-oop
-4. Sukompiliuokite programą
+### 3. Klonuokite repozitoriją
+
+git clone https://github.com/thrust0/OOP-egz.git
+cd OOP-egz
+cd programa
+### 4. Sukompiliuokite programą
 make main
-5. Paleiskite programą
+### 5. Paleiskite programą
 ./main
-Windows vartotojams
+### Windows vartotojams
 Atsisiųskite ir įdiekite MinGW
 Pridėkite C:\MinGW\bin į sistemos PATH
 Atidarykite Command Prompt ir eikite į projekto aplanką:
